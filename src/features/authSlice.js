@@ -1,17 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// const API_URL = process.env.REACT_APP_API_URL;// Mock API endpoint
-// eslint-disable-next-line no-undef
-const API_URL = `${process.env.REACT_APP_API_URL}`;
+
 
 // Register user 
 export const registerUser = createAsyncThunk("auth/registerUser", async (user, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${API_URL}/api/auth/register`, user);
-    alert(`${API_URL}/api/auth/register`)
-    console.log(`${API_URL}/api/auth/register`);
-    
+    const response = await axios.post(`https://faq-backend-478w.onrender.com/api/auth/register`, user);
+   
     localStorage.setItem("user", JSON.stringify(response.data));
     localStorage.setItem("isAuthenticated", "true");
     return response.data;
@@ -23,7 +19,7 @@ export const registerUser = createAsyncThunk("auth/registerUser", async (user, {
 
 export const loginUser = createAsyncThunk("auth/loginUser", async ({ email, password }, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${API_URL}/api/auth/login`, { email, password });
+    const response = await axios.post(`https://faq-backend-478w.onrender.com/api/auth/login`, { email, password });
     localStorage.setItem("user", JSON.stringify(response.data));
     localStorage.setItem("isAuthenticated", "true");
     return response.data;
@@ -34,7 +30,7 @@ export const loginUser = createAsyncThunk("auth/loginUser", async ({ email, pass
 
 export const verifyOTP = createAsyncThunk("auth/verifyOTP", async ({ email, otp }, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${API_URL}/verify-otp`, { email, otp });
+    const response = await axios.post(`https://faq-backend-478w.onrender.com/api/auth/verify-otp`, { email, otp });
     return response.data.message;
   } catch (error) {
     return rejectWithValue(error.response.data.message || "OTP verification failed");
@@ -44,7 +40,7 @@ export const verifyOTP = createAsyncThunk("auth/verifyOTP", async ({ email, otp 
 
 export const resendOTP = createAsyncThunk("auth/resendOTP", async (email, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${API_URL}/resend-otp`, { email });
+    const response = await axios.post(`https://faq-backend-478w.onrender.com/api/auth/register/resend-otp`, { email });
     return response.data.message;
   } catch (error) {
     return rejectWithValue(error.response.data.message || "Resend OTP failed");
@@ -60,7 +56,7 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
 
 export const forgotPassword = createAsyncThunk("auth/forgotPassword", async (email, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${API_URL}/forgot-password`, { email });
+    const response = await axios.post(`https://faq-backend-478w.onrender.com/api/auth/forgot-password`, { email });
     return response.data.message; // Expecting message like "OTP sent"
   } catch (error) {
     return rejectWithValue(error.response?.data?.message || "Failed to send OTP");
@@ -69,7 +65,7 @@ export const forgotPassword = createAsyncThunk("auth/forgotPassword", async (ema
 
 export const resetPassword = createAsyncThunk("auth/resetPassword", async ({ email, newPassword }, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${API_URL}/reset-password`, { email, newPassword });
+    const response = await axios.post(`https://faq-backend-478w.onrender.com/api/auth/reset-password`, { email, newPassword });
     return response.data.message; // Expecting message like "Password reset successful"
   } catch (error) {
     return rejectWithValue(error.response?.data?.message || "Failed to reset password");
