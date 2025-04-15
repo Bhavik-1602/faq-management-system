@@ -2,12 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // const API_URL = process.env.REACT_APP_API_URL;// Mock API endpoint
-const API_URL = `${process.env.REACT_APP_API_URL}/api/auth`;
+const API_URL = `${process.env.REACT_APP_API_URL}`;
 
 // Register user
 export const registerUser = createAsyncThunk("auth/registerUser", async (user, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${API_URL}/register`, user);
+    const response = await axios.post(`${API_URL}/api/auth/register`, user);
     localStorage.setItem("user", JSON.stringify(response.data));
     localStorage.setItem("isAuthenticated", "true");
     return response.data;
@@ -19,7 +19,7 @@ export const registerUser = createAsyncThunk("auth/registerUser", async (user, {
 
 export const loginUser = createAsyncThunk("auth/loginUser", async ({ email, password }, { rejectWithValue }) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, { email, password });
+    const response = await axios.post(`${API_URL}/api/auth/login`, { email, password });
     localStorage.setItem("user", JSON.stringify(response.data));
     localStorage.setItem("isAuthenticated", "true");
     return response.data;
