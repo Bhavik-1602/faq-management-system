@@ -11,12 +11,12 @@ const EditFaq = () => {
   const [answer, setAnswer] = useState("");
 
   // Get the URL from environment variables
-  const API_URL_FAQ = process.env.REACT_APP_API_URL_FAQ;
+  const API_URL = "https://faq-backend-478w.onrender.com/api/faq"
 
   useEffect(() => {
     const fetchFaq = async () => {
       try {
-        const res = await axios.get(`${API_URL_FAQ}/${id}`);
+        const res = await axios.get(`${API_URL}/${id}`);
         setQuestion(res.data.question);
         setAnswer(res.data.answer);
       } catch (error) {
@@ -26,7 +26,7 @@ const EditFaq = () => {
     };
 
     fetchFaq();
-  }, [id, API_URL_FAQ]);
+  }, [id, API_URL]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -35,7 +35,7 @@ const EditFaq = () => {
     if (!isConfirmed) return;
 
     try {
-      await axios.put(`${API_URL_FAQ}/${id}`, { question, answer });
+      await axios.put(`${API_URL}/${id}`, { question, answer });
       toast.success("FAQ updated successfully ✅");
       navigate("/home", { state: { fromEdit: true } });
     } catch (error) {

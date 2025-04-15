@@ -10,12 +10,12 @@ const AddFaq = () => {
   const [answer, setAnswer] = useState("");
 
   // Get the URL from environment variables
-  const API_URL_FAQ = process.env.REACT_APP_API_URL_FAQ;
+  const API_URL = "https://faq-backend-478w.onrender.com/api/faq"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(API_URL_FAQ, { question, answer });
+      await axios.post(API_URL, { question, answer });
       toast.success("FAQ added successfully! ✅");
       navigate("/home", { state: { fromAdd: true } });
     } catch (error) {
