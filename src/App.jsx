@@ -11,7 +11,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import NotFound from "./pages/notfound";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const location = useLocation();
