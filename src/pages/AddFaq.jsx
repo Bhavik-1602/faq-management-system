@@ -9,14 +9,12 @@ const AddFaq = () => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
 
-  // Get the URL from environment variables
-  // eslint-disable-next-line no-undef
-  const API_URL = `${process.env.REACT_APP_API_URL}/api/faq`;
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(API_URL, { question, answer });
+      await axios.post(`https://faq-backend-478w.onrender.com/api/faq`, { question, answer });
       toast.success("FAQ added successfully! ✅");
       navigate("/home", { state: { fromAdd: true } });
     } catch (error) {

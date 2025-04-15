@@ -9,12 +9,12 @@ const ForgotPassword = () => {
 
   // Get the URL from environment variables
   // eslint-disable-next-line no-undef
-  const API_URL = `${process.env.REACT_APP_API_URL}/api/auth`;
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_URL}/forgot-password`, { email });
+      const res = await axios.post(`https://faq-backend-478w.onrender.com/api/auth/forgot-password`, { email });
       setMessage(res.data.message);
       setTimeout(() => navigate('/'), 7000);
     } catch (err) {

@@ -11,14 +11,12 @@ const ResetPassword = () => {
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get('token');
 
-  // Get API URL from the environment variable
-  // eslint-disable-next-line no-undef
-  const API_URL = `${process.env.REACT_APP_API_URL}/api/faq`;
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_URL}/reset-password`, {
+      const res = await axios.post(`https://faq-backend-478w.onrender.com/api/faq/reset-password`, {
         resetToken: token,
         newPassword,
       });

@@ -15,11 +15,11 @@ const Home = () => {
 
   // Get the URL from environment variables
   // eslint-disable-next-line no-undef
-  const API_URL = `${process.env.REACT_APP_API_URL}/api/auth`;
+
 
   const fetchFaqs = async () => {
     try {
-      const res = await axios.get(API_URL);
+      const res = await axios.get(`https://faq-backend-478w.onrender.com/api/faq`);
       setFaqs(res.data.reverse()); // Display FAQ from top
     } catch (error) {
       console.error("Error fetching FAQs:", error);
@@ -30,7 +30,7 @@ const Home = () => {
     const confirmed = window.confirm("Are you sure you want to delete this FAQ?");
     if (!confirmed) return;
     try {
-      await axios.delete(`${API_URL}/${id}`);
+      await axios.delete(`https://faq-backend-478w.onrender.com/api/faq/${id}`);
       setFaqs((prev) => prev.filter((faq) => faq._id !== id));
     } catch (error) {
       console.error("Error deleting FAQ:", error);
