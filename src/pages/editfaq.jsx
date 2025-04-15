@@ -10,10 +10,13 @@ const EditFaq = () => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
 
+  // Get the URL from environment variables
+  const API_URL_FAQ = process.env.REACT_APP_API_URL_FAQ;
+
   useEffect(() => {
     const fetchFaq = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/faq/${id}`);
+        const res = await axios.get(`${API_URL_FAQ}/${id}`);
         setQuestion(res.data.question);
         setAnswer(res.data.answer);
       } catch (error) {
@@ -23,7 +26,7 @@ const EditFaq = () => {
     };
 
     fetchFaq();
-  }, [id]);
+  }, [id, API_URL_FAQ]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -32,7 +35,7 @@ const EditFaq = () => {
     if (!isConfirmed) return;
 
     try {
-      await axios.put(`http://localhost:5000/api/faq/${id}`, { question, answer });
+      await axios.put(`${API_URL_FAQ}/${id}`, { question, answer });
       toast.success("FAQ updated successfully ✅");
       navigate("/home", { state: { fromEdit: true } });
     } catch (error) {
@@ -80,21 +83,21 @@ const EditFaq = () => {
           </div>
 
           <div className="flex justify-between gap-4">
-          <button
-  type="submit"
-  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200 flex items-center justify-center space-x-2"
->
-  <FaPen className="h-5 w-5" />
-  <span>Update FAQ</span>
-</button>
-<button
-  type="button"
-  onClick={handleCancel}
-  className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 rounded-lg transition duration-200 flex items-center justify-center space-x-2"
->
-  <FaTimes className="h-5 w-5" />
-  <span>Cancel</span>
-</button>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200 flex items-center justify-center space-x-2"
+            >
+              <FaPen className="h-5 w-5" />
+              <span>Update FAQ</span>
+            </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 rounded-lg transition duration-200 flex items-center justify-center space-x-2"
+            >
+              <FaTimes className="h-5 w-5" />
+              <span>Cancel</span>
+            </button>
           </div>
         </form>
       </div>

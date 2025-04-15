@@ -9,40 +9,55 @@ const ResetPassword = () => {
   const navigate = useNavigate();
 
   const queryParams = new URLSearchParams(location.search);
-  const token = queryParams.get('token'); // get token from URL
+  const token = queryParams.get('token');
+
+  // Get API URL from the environment variable
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/reset-password', {
+      const res = await axios.post(`${API_URL}/reset-password`, {
         resetToken: token,
         newPassword,
       });
-      setMessage(res.data.message);
-
-      // Redirect to login after 2 seconds
       setMessage('Password reset successful! Redirecting to login...');
-
+      setTimeout(() => navigate('/'), 3000);
     } catch (err) {
       setMessage(err.response?.data?.message || 'Something went wrong');
     }
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto">
-      <h2 className="text-xl font-semibold mb-4">Reset Password</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="password"
-          placeholder="Enter new password"
-          className="w-full border p-2 mb-2"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          required
-        />
-        <button type="submit" className="bg-green-600 text-white p-2 w-full">Reset Password</button>
-      </form>
-      {message && <p className="mt-4 text-green-600">{message}</p>}
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Reset Password</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+            <input
+              type="password"
+              placeholder="Enter new password"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-lg transition duration-200"
+          >
+            Reset Password
+          </button>
+        </form>
+
+        {message && (
+          <p className="mt-4 text-center text-green-600 font-medium">
+            {message}
+          </p>
+        )}
+      </div>
     </div>
   );
 };
