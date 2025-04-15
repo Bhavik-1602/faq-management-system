@@ -9,6 +9,9 @@ const API_URL = `${process.env.REACT_APP_API_URL}`;
 export const registerUser = createAsyncThunk("auth/registerUser", async (user, { rejectWithValue }) => {
   try {
     const response = await axios.post(`${API_URL}/api/auth/register`, user);
+    alert(`${API_URL}/api/auth/register`)
+    console.log(`${API_URL}/api/auth/register`);
+    
     localStorage.setItem("user", JSON.stringify(response.data));
     localStorage.setItem("isAuthenticated", "true");
     return response.data;
