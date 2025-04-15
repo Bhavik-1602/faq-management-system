@@ -2,7 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
-import AddFaq from "./pages/addfaq";
+import AddFaq from "./pages/AddFaq";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditFaq from "./pages/editfaq";
 import Navbar from "./pages/Navbar";
