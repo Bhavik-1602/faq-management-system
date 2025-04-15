@@ -11,7 +11,7 @@ const EditFaq = () => {
   const [answer, setAnswer] = useState("");
 
   // Get the URL from environment variables
-  const API_URL = "https://faq-backend-478w.onrender.com/api/faq"
+  const API_URL = `$process.env.REACT_APP_API_URL/api/faq`;
 
   useEffect(() => {
     const fetchFaq = async () => {

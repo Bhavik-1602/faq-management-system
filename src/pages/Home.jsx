@@ -14,8 +14,8 @@ const Home = () => {
   const [openFaqId, setOpenFaqId] = useState(null);
 
   // Get the URL from environment variables
-  const API_URL = "https://faq-backend-478w.onrender.com/api/faq"
-  
+  const API_URL = `$process.env.REACT_APP_API_URL/api/auth`;
+
   const fetchFaqs = async () => {
     try {
       const res = await axios.get(API_URL);

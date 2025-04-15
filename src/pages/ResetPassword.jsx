@@ -12,7 +12,7 @@ const ResetPassword = () => {
   const token = queryParams.get('token');
 
   // Get API URL from the environment variable
-  const API_URL = "https://faq-backend-478w.onrender.com/api/faq"
+  const API_URL = `$process.env.REACT_APP_API_URL/api/faq`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
