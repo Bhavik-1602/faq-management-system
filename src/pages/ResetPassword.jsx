@@ -12,7 +12,8 @@ const ResetPassword = () => {
   const token = queryParams.get('token');
 
   // Get API URL from the environment variable
-  const API_URL = `$process.env.REACT_APP_API_URL/api/faq`;
+  // eslint-disable-next-line no-undef
+  const API_URL = `${process.env.REACT_APP_API_URL}/api/faq`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();

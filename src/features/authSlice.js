@@ -2,9 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // const API_URL = process.env.REACT_APP_API_URL;// Mock API endpoint
+// eslint-disable-next-line no-undef
 const API_URL = `${process.env.REACT_APP_API_URL}`;
 
-// Register user
+// Register user 
 export const registerUser = createAsyncThunk("auth/registerUser", async (user, { rejectWithValue }) => {
   try {
     const response = await axios.post(`${API_URL}/api/auth/register`, user);

@@ -14,7 +14,8 @@ const Home = () => {
   const [openFaqId, setOpenFaqId] = useState(null);
 
   // Get the URL from environment variables
-  const API_URL = `$process.env.REACT_APP_API_URL/api/auth`;
+  // eslint-disable-next-line no-undef
+  const API_URL = `${process.env.REACT_APP_API_URL}/api/auth`;
 
   const fetchFaqs = async () => {
     try {

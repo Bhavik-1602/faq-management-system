@@ -8,7 +8,8 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
 
   // Get the URL from environment variables
-  const API_URL = `$process.env.REACT_APP_API_URL/api/auth`;
+  // eslint-disable-next-line no-undef
+  const API_URL = `${process.env.REACT_APP_API_URL}/api/auth`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
